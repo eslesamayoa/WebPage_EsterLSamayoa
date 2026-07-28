@@ -1,0 +1,348 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SearchTrendIcon from '../components/icons/SearchTrendIcon.astro';
+import RepurposeArrowIcon from '../components/icons/RepurposeArrowIcon.astro';
+import ChartUpIcon from '../components/icons/ChartUpIcon.astro';
+import ChatBubbleIcon from '../components/icons/ChatBubbleIcon.astro';
+import HandsLaptopIcon from '../components/icons/HandsLaptopIcon.astro';
+import CalendarCheckIcon from '../components/icons/CalendarCheckIcon.astro';
+import PaletteIcon from '../components/icons/PaletteIcon.astro';
+import GridScheduleIcon from '../components/icons/GridScheduleIcon.astro';
+import QueueStackIcon from '../components/icons/QueueStackIcon.astro';
+import BarChartIcon from '../components/icons/BarChartIcon.astro';
+
+const WHATSAPP_URL = 'https://wa.me/50767827835';
+
+const servicios = [
+  {
+    Icon: SearchTrendIcon,
+    titulo: 'Auditoría + Optimización de Perfil',
+    texto:
+      'Reviso tu cuenta actual, corrijo tu bio, tableros y configuración para que Pinterest empiece a mostrarte a la audiencia correcta desde el día uno.',
+  },
+  {
+    Icon: RepurposeArrowIcon,
+    titulo: 'Repurposing Mensual de Contenido',
+    texto:
+      'Cada mes, tomo tu contenido existente y lo transformo en un set de pines nuevos, con descripciones optimizadas por palabra clave y diseño alineado a tu marca.',
+  },
+  {
+    Icon: ChartUpIcon,
+    titulo: 'Gestión Completa de Pinterest',
+    texto:
+      'Estrategia, diseño, programación y reportes de resultados. Tú sigues creando contenido en tus otras plataformas, yo me encargo de que Pinterest trabaje para ti en piloto automático.',
+  },
+];
+
+const pasos = [
+  {
+    Icon: ChatBubbleIcon,
+    titulo: 'Llamada de descubrimiento',
+    texto: 'Hablamos de tu negocio, tu audiencia y tus metas.',
+  },
+  {
+    Icon: HandsLaptopIcon,
+    titulo: 'Envías tu contenido existente',
+    texto: 'Blogs, reels, guías, testimonios, lo que ya tengas.',
+  },
+  {
+    Icon: SearchTrendIcon,
+    titulo: 'Investigo y diseño',
+    texto: 'Busco las palabras clave correctas y creo los pines.',
+  },
+  {
+    Icon: CalendarCheckIcon,
+    titulo: 'Programo y reporto',
+    texto: 'Todo publicado en tu cuenta con reportes claros de resultados.',
+  },
+];
+
+const herramientas = [
+  { Icon: PaletteIcon, nombre: 'Canva' },
+  { Icon: GridScheduleIcon, nombre: 'Tailwind App' },
+  { Icon: QueueStackIcon, nombre: 'Buffer' },
+  { Icon: BarChartIcon, nombre: 'Pinterest Analytics' },
+];
+---
+
+<BaseLayout lang="es" title="Servicios de Esther Levy">
+  <Header />
+
+  <main>
+    <section class="servicios-section reveal">
+      <div class="section-inner">
+        <h1>Cómo puedo ayudarte</h1>
+        <div class="servicios-grid">
+          {servicios.map(({ Icon, titulo, texto }) => (
+            <div class="servicio-card">
+              <div class="servicio-icon-badge">
+                <Icon size={28} />
+              </div>
+              <h3>{titulo}</h3>
+              <div class="servicio-desc-wrap">
+                <div class="servicio-desc-inner">
+                  <p>{texto}</p>
+                </div>
+              </div>
+              <a
+                class="servicio-cta"
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Contáctanos
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="proceso-section reveal">
+      <div class="section-inner">
+        <h2>Así de simple es empezar</h2>
+        <div class="proceso-steps">
+          {pasos.map(({ Icon, titulo, texto }, index) => (
+            <div class="proceso-step">
+              <p class="proceso-number">{String(index + 1).padStart(2, '0')}</p>
+              <div class="proceso-icon-badge">
+                <Icon size={26} />
+              </div>
+              <h3>{titulo}</h3>
+              <p>{texto}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="herramientas-section reveal">
+      <div class="section-inner">
+        <h2 class="herramientas-heading">Las herramientas que uso</h2>
+        <div class="herramientas-row">
+          {herramientas.map(({ Icon, nombre }) => (
+            <div class="herramienta-badge">
+              <Icon size={20} />
+              <span>{nombre}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 1.25rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4.5vw, 2.75rem);
+    text-align: center;
+    margin: 0 0 2.5rem;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    text-align: center;
+    margin: 0 0 2.5rem;
+  }
+
+  /* Servicios */
+  .servicios-section {
+    background-color: var(--color-bg);
+  }
+
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .servicio-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.75rem;
+  }
+
+  .servicio-icon-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .servicio-card h3 {
+    font-size: 1.2rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .servicio-desc-wrap {
+    display: grid;
+    grid-template-rows: 1fr;
+    width: 100%;
+  }
+
+  .servicio-desc-inner {
+    overflow: hidden;
+  }
+
+  .servicio-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin: 0 0 1.5rem;
+  }
+
+  /* On devices with real hover (desktop mouse), the description starts
+     collapsed and reveals on hover or keyboard focus. Touch devices never
+     match this query, so the description stays visible by default. */
+  @media (hover: hover) and (pointer: fine) {
+    .servicio-desc-wrap {
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.25s ease;
+    }
+
+    .servicio-card:hover .servicio-desc-wrap,
+    .servicio-card:focus-within .servicio-desc-wrap {
+      grid-template-rows: 1fr;
+    }
+  }
+
+  .servicio-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.9rem;
+    background-color: var(--color-accent-strong);
+    color: var(--color-cta-text);
+    border-radius: 999px;
+    padding: 0.7rem 1.5rem;
+    text-decoration: none;
+    min-height: 44px;
+    transition: filter 0.15s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .servicio-cta:hover {
+    filter: brightness(0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Proceso */
+  .proceso-section {
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .proceso-steps {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .proceso-step {
+    flex: 1;
+    text-align: center;
+  }
+
+  .proceso-number {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    margin: 0 0 0.75rem;
+  }
+
+  .proceso-icon-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-accent);
+  }
+
+  .proceso-step h3 {
+    font-size: 1.05rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .proceso-step p {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  /* Herramientas */
+  .herramientas-section {
+    background-color: var(--color-bg);
+  }
+
+  .herramientas-heading {
+    font-size: 1.15rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .herramientas-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .herramienta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.6rem 1.1rem;
+    color: var(--color-text);
+    font-size: 0.9rem;
+  }
+
+  .herramienta-badge :global(svg) {
+    color: var(--color-accent-strong);
+  }
+
+  @media (max-width: 700px) {
+    .proceso-steps {
+      flex-direction: column;
+    }
+
+    .proceso-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-inner {
+      padding: 3rem 1rem;
+    }
+  }
+</style>

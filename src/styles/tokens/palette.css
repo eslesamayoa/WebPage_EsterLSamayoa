@@ -1,0 +1,13 @@
+:root {
+  --color-bg: #F8F6FB;
+  --color-surface: #FFFFFF;
+  --color-primary: #C4BCD9;
+  --color-accent: #8E9B7D;
+  --color-accent-strong: #6A745D;
+  --color-cta-text: #FFFFFF;
+  --color-text: #4E4A57;
+  --color-text-muted: #8B8494;
+  --color-border: #E7E1F0;
+  --font-heading: 'Marcellus', serif;
+  --font-body: 'DM Sans', sans-serif;
+}

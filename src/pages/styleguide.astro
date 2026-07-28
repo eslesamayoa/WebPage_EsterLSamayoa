@@ -1,0 +1,632 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AvatarPlaceholder from '../components/AvatarPlaceholder.astro';
+import PinIcon from '../components/icons/PinIcon.astro';
+import RepurposeArrowIcon from '../components/icons/RepurposeArrowIcon.astro';
+import SearchTrendIcon from '../components/icons/SearchTrendIcon.astro';
+import CalendarCheckIcon from '../components/icons/CalendarCheckIcon.astro';
+import ChartUpIcon from '../components/icons/ChartUpIcon.astro';
+import ClockCheckIcon from '../components/icons/ClockCheckIcon.astro';
+import HandsLaptopIcon from '../components/icons/HandsLaptopIcon.astro';
+import ChatBubbleIcon from '../components/icons/ChatBubbleIcon.astro';
+
+const icons = [
+  { name: 'PinIcon', Comp: PinIcon },
+  { name: 'RepurposeArrowIcon', Comp: RepurposeArrowIcon },
+  { name: 'SearchTrendIcon', Comp: SearchTrendIcon },
+  { name: 'CalendarCheckIcon', Comp: CalendarCheckIcon },
+  { name: 'ChartUpIcon', Comp: ChartUpIcon },
+  { name: 'ClockCheckIcon', Comp: ClockCheckIcon },
+  { name: 'HandsLaptopIcon', Comp: HandsLaptopIcon },
+  { name: 'ChatBubbleIcon', Comp: ChatBubbleIcon },
+];
+
+const swatches = [
+  { name: 'Lavanda', hex: '#C4BCD9', varName: '--color-primary', uso: 'Color primario, decorativo' },
+  { name: 'Salvia', hex: '#8E9B7D', varName: '--color-accent', uso: 'Acento decorativo' },
+  { name: 'Salvia oscuro', hex: '#6A745D', varName: '--color-accent-strong', uso: 'Uso exclusivo en botones' },
+  { name: 'Bruma lila', hex: '#F8F6FB', varName: '--color-bg', uso: 'Fondo' },
+  { name: 'Grafito violeta', hex: '#4E4A57', varName: '--color-text', uso: 'Texto principal' },
+  { name: 'Gris malva', hex: '#8B8494', varName: '--color-text-muted', uso: 'Texto muted' },
+  { name: 'Lila papel', hex: '#E7E1F0', varName: '--color-border', uso: 'Borde' },
+  { name: 'Blanco', hex: '#FFFFFF', varName: '--color-surface', uso: 'Superficie' },
+];
+
+const typeScale = [
+  { tag: 'h1', size: '2.5rem (40px)', text: 'Tu contenido ya existe. Yo lo convierto en tráfico constante en Pinterest.' },
+  { tag: 'h2', size: '2rem (32px)', text: 'Pinterest no es una red social, es un motor de búsqueda. Y la mayoría lo está usando mal.' },
+  { tag: 'h3', size: '1.5rem (24px)', text: 'Investigar palabras clave, diseñar pines, programar, medir resultados.' },
+  { tag: 'h4', size: '1.25rem (20px)', text: 'Posts de blog, reels, testimonios, guías y lead magnets.' },
+  { tag: 'h5', size: '1.125rem (18px)', text: 'Pines nuevos, optimizados con SEO de Pinterest.' },
+  { tag: 'h6', size: '1rem (16px)', text: 'Repurposing de contenido que ya existe.' },
+];
+
+const contrastChecks = [
+  { colorAName: 'Texto', colorAVar: '--color-text', colorBName: 'Fondo', colorBVar: '--color-bg', ratio: '8.0 a 1', status: 'pass' },
+  { colorAName: 'Texto muted', colorAVar: '--color-text-muted', colorBName: 'Fondo', colorBVar: '--color-bg', ratio: '3.4 a 1', status: 'large' },
+  { colorAName: 'Texto', colorAVar: '--color-text', colorBName: 'Superficie', colorBVar: '--color-surface', ratio: '8.6 a 1', status: 'pass' },
+  { colorAName: 'Blanco (texto de botón)', colorAVar: '--color-cta-text', colorBName: 'Salvia oscuro', colorBVar: '--color-accent-strong', ratio: '4.9 a 1', status: 'pass' },
+];
+
+const proportions = [
+  { label: 'Fondo', pct: 60, varName: '--color-bg' },
+  { label: 'Primario', pct: 25, varName: '--color-primary' },
+  { label: 'Acento fuerte', pct: 10, varName: '--color-accent-strong' },
+  { label: 'Texto y detalles', pct: 5, varName: '--color-text' },
+];
+
+const reglas = [
+  'Usa salvia oscuro (--color-accent-strong) para fondos de botones y cualquier elemento interactivo que lleve texto blanco encima.',
+  'Nunca uses salvia clarito (--color-accent) como fondo de botón con texto blanco, resérvalo para detalles decorativos sin texto encima, como bordes o separadores.',
+  'El lavanda (--color-primary) es un color decorativo. No lo uses como color de texto, solo como fondo de bloques o detalles visuales.',
+  'Alterna el fondo blanco (--color-surface) y la bruma lila (--color-bg) entre secciones consecutivas para dar separación visual sin depender de bordes gruesos.',
+  'No uses el texto muted (--color-text-muted) en párrafos largos, solo en textos cortos y de tamaño grande como leyendas o notas breves.',
+  'Usa siempre Marcellus para encabezados y DM Sans para cuerpo de texto, respetando la escala definida en esta guía.',
+];
+---
+
+<BaseLayout lang="es" title="Guía de estilos interna" noindex>
+  <div class="page-wrap">
+    <header class="page-intro">
+      <h1>Guía de estilos interna</h1>
+      <p>
+        Referencia de la paleta definitiva del sitio: Lavanda suave con
+        Marcellus en encabezados y DM Sans en cuerpo de texto. Esta página
+        es de uso interno, no aparece en la navegación ni en el mapa del
+        sitio, y se elimina antes del lanzamiento final.
+      </p>
+    </header>
+
+    <section class="sg-section">
+      <p class="sg-eyebrow">A. Paleta</p>
+      <div class="swatch-grid">
+        {swatches.map((s) => (
+          <div class="swatch">
+            <div class="swatch-chip" style={`background-color: var(${s.varName});`}></div>
+            <p class="swatch-name">{s.name}</p>
+            <p class="swatch-hex">{s.hex}</p>
+            <p class="swatch-var">{s.varName}</p>
+            <p class="swatch-uso">{s.uso}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="sg-section">
+      <p class="sg-eyebrow">B. Tipografía</p>
+      <div class="type-scale">
+        {typeScale.map((t) => (
+          <div class="type-row">
+            <div class="type-meta">
+              <span class="tag-label">{t.tag}</span>
+              <span class="size-label">{t.size}</span>
+            </div>
+            {t.tag === 'h1' && <h1 class="type-sample" style={`font-size:${t.size.split(' ')[0]}`}>{t.text}</h1>}
+            {t.tag === 'h2' && <h2 class="type-sample" style={`font-size:${t.size.split(' ')[0]}`}>{t.text}</h2>}
+            {t.tag === 'h3' && <h3 class="type-sample" style={`font-size:${t.size.split(' ')[0]}`}>{t.text}</h3>}
+            {t.tag === 'h4' && <h4 class="type-sample" style={`font-size:${t.size.split(' ')[0]}`}>{t.text}</h4>}
+            {t.tag === 'h5' && <h5 class="type-sample" style={`font-size:${t.size.split(' ')[0]}`}>{t.text}</h5>}
+            {t.tag === 'h6' && <h6 class="type-sample" style={`font-size:${t.size.split(' ')[0]}`}>{t.text}</h6>}
+          </div>
+        ))}
+        <div class="type-row">
+          <div class="type-meta">
+            <span class="tag-label">body</span>
+            <span class="size-label">1rem (16px)</span>
+          </div>
+          <p class="body-sample">
+            Ayudo a coaches, creadoras, podcasters y dueñas de negocio a
+            transformar el contenido que ya publicaron (blogs, reels,
+            guías, testimonios) en pines optimizados que Pinterest sigue
+            mostrando durante meses, no días.
+          </p>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <span class="tag-label">caption</span>
+            <span class="size-label">0.85rem (13.6px)</span>
+          </div>
+          <p class="caption-sample">
+            Pines optimizados que Pinterest sigue mostrando durante meses,
+            no días.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sg-section">
+      <p class="sg-eyebrow">C. Contraste y legibilidad</p>
+      <div class="contrast-list">
+        {contrastChecks.map((c) => (
+          <div class="contrast-row">
+            <div class="contrast-swatches">
+              <div class="contrast-chip" style={`background-color: var(${c.colorAVar});`}></div>
+              <div class="contrast-chip" style={`background-color: var(${c.colorBVar});`}></div>
+            </div>
+            <p class="contrast-label">{c.colorAName} sobre {c.colorBName}</p>
+            <p class="contrast-ratio">{c.ratio}</p>
+            {c.status === 'pass' && <span class="badge badge-pass">Cumple AA</span>}
+            {c.status === 'large' && <span class="badge badge-warn">Solo válido en texto grande</span>}
+          </div>
+        ))}
+      </div>
+      <div class="warning-note">
+        <p>
+          <strong>Importante:</strong> nunca uses salvia clarito
+          (#8E9B7D) como fondo de botón con texto blanco. Ese combo no
+          pasa el mínimo de accesibilidad. Usa siempre
+          --color-accent-strong para fondos de botón.
+        </p>
+      </div>
+    </section>
+
+    <section class="sg-section">
+      <p class="sg-eyebrow">D. Proporciones de uso</p>
+      <div class="proportions-frame">
+        <div class="proportions-bar">
+          {proportions.map((p) => (
+            <div
+              class="proportions-segment"
+              style={`width:${p.pct}%; background-color: var(${p.varName});`}
+            ></div>
+          ))}
+        </div>
+        <ul class="proportions-legend">
+          {proportions.map((p) => (
+            <li>
+              <span class="legend-dot" style={`background-color: var(${p.varName});`}></span>
+              {p.label}: {p.pct}%
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="sg-section">
+      <p class="sg-eyebrow">E. Componentes</p>
+      <div class="components-row">
+        <div class="component-demo">
+          <p class="specimen-label">Botón primario</p>
+          <button class="btn-primary" type="button">Reservar sesión</button>
+        </div>
+        <div class="component-demo">
+          <p class="specimen-label">Botón secundario</p>
+          <button class="btn-secondary" type="button">Ver más</button>
+        </div>
+      </div>
+      <div class="component-demo card-demo">
+        <p class="specimen-label">Card</p>
+        <div class="card">
+          <h3>Sesión de acompañamiento</h3>
+          <p>
+            Un espacio breve para revisar tu estrategia de contenido y
+            resolver dudas puntuales.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sg-section">
+      <p class="sg-eyebrow">F. Reglas de uso</p>
+      <ol class="reglas-list">
+        {reglas.map((regla) => (
+          <li>{regla}</li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="sg-section">
+      <p class="sg-eyebrow">G. Íconos y avatar</p>
+      <div class="icon-grid">
+        {icons.map(({ name, Comp }) => (
+          <div class="icon-demo">
+            <div class="icon-demo-chip">
+              <Comp size={26} />
+            </div>
+            <p class="icon-demo-name">{name}</p>
+          </div>
+        ))}
+      </div>
+      <div class="avatar-demo-row">
+        <div class="component-demo">
+          <p class="specimen-label">Avatar sin foto</p>
+          <AvatarPlaceholder size={88} />
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 5rem;
+  }
+
+  .page-intro {
+    max-width: 65ch;
+    margin: 0 auto 3rem;
+  }
+
+  .page-intro h1 {
+    font-size: 1.75rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .page-intro p {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .sg-section {
+    margin-bottom: 3.5rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .sg-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .sg-eyebrow {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin: 0 0 1.5rem;
+  }
+
+  /* A. Paleta */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .swatch-chip {
+    height: 80px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    margin-bottom: 0.6rem;
+  }
+
+  .swatch-name {
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .swatch-hex {
+    font-family: monospace;
+    font-size: 0.85rem;
+    margin: 0.15rem 0 0;
+  }
+
+  .swatch-var {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin: 0.15rem 0 0;
+  }
+
+  .swatch-uso {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin: 0.35rem 0 0;
+  }
+
+  /* B. Tipografia */
+  .type-row {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px dashed var(--color-border);
+  }
+
+  .type-row:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .type-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .tag-label {
+    display: inline-block;
+    background-color: var(--color-border);
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.1rem 0.45rem;
+    border-radius: 4px;
+  }
+
+  .size-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .type-sample {
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .body-sample {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin: 0;
+    max-width: 65ch;
+  }
+
+  .caption-sample {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  /* C. Contraste */
+  .contrast-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contrast-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.9rem 1rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+  }
+
+  .contrast-swatches {
+    display: flex;
+  }
+
+  .contrast-chip {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--color-border);
+  }
+
+  .contrast-chip:first-child {
+    border-radius: 6px 0 0 6px;
+  }
+
+  .contrast-chip:last-child {
+    border-radius: 0 6px 6px 0;
+    border-left: none;
+  }
+
+  .contrast-label {
+    margin: 0;
+    font-size: 0.9rem;
+    min-width: 180px;
+  }
+
+  .contrast-ratio {
+    margin: 0;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  .badge {
+    margin-left: auto;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .badge-pass {
+    background-color: #DDEBD8;
+    color: #3B5C3A;
+  }
+
+  .badge-warn {
+    background-color: #F6E6C8;
+    color: #6B4E14;
+  }
+
+  .warning-note {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+  }
+
+  .warning-note p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  /* D. Proporciones */
+  .proportions-frame {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+
+  .proportions-bar {
+    display: flex;
+    height: 32px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .proportions-legend {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    font-size: 0.85rem;
+    color: var(--color-text);
+  }
+
+  .proportions-legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    display: inline-block;
+  }
+
+  /* E. Componentes */
+  .components-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .specimen-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin: 0 0 0.75rem;
+  }
+
+  .btn-primary {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    background-color: var(--color-accent-strong);
+    color: var(--color-cta-text);
+    border: none;
+    border-radius: 999px;
+    padding: 0.85rem 1.75rem;
+    cursor: pointer;
+    min-height: 48px;
+  }
+
+  .btn-secondary {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    background-color: transparent;
+    color: var(--color-text);
+    border: 2px solid var(--color-primary);
+    border-radius: 999px;
+    padding: calc(0.85rem - 2px) calc(1.75rem - 2px);
+    cursor: pointer;
+    min-height: 48px;
+  }
+
+  .card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    max-width: 340px;
+  }
+
+  .card h3 {
+    font-size: 1.15rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .card p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--color-text);
+  }
+
+  /* F. Reglas */
+  .reglas-list {
+    max-width: 70ch;
+    padding-left: 1.25rem;
+    margin: 0;
+    color: var(--color-text);
+  }
+
+  .reglas-list li {
+    margin-bottom: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .reglas-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* G. Iconos y avatar */
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .icon-demo {
+    text-align: center;
+  }
+
+  .icon-demo-chip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.5rem;
+    border-radius: 50%;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-accent-strong);
+  }
+
+  .icon-demo-name {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .avatar-demo-row {
+    display: flex;
+    gap: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    .page-wrap {
+      padding: 2rem 1rem 4rem;
+    }
+
+    .contrast-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .badge {
+      margin-left: 0;
+    }
+  }
+</style>

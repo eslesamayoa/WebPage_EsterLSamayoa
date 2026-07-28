@@ -1,0 +1,32 @@
+---
+interface Props {
+  color?: string;
+  opacity?: number;
+}
+
+const { color = 'var(--color-primary)', opacity = 0.25 } = Astro.props;
+---
+
+<svg
+  class="decorative-blob"
+  viewBox="0 0 400 400"
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+>
+  <path
+    fill={color}
+    opacity={opacity}
+    d="M320,150 C365,200 350,285 285,325 C220,365 135,350 95,300 C55,250 60,165 115,115 C170,65 275,100 320,150 Z"
+  />
+</svg>
+
+<style>
+  .decorative-blob {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+  }
+</style>
