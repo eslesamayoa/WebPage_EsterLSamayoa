@@ -11,9 +11,17 @@ interface Props {
   lang: string;
   title: string;
   noindex?: boolean;
+  path?: string;
+  altPath?: string;
 }
 
-const { lang, title, noindex = false } = Astro.props;
+const { lang, title, noindex = false, path, altPath } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const site = Astro.site;
+const altLang = lang === 'es' ? 'en' : 'es';
+const selfUrl = site && path !== undefined ? new URL(`${base}${path}`, site).toString() : undefined;
+const altUrl = site && altPath !== undefined ? new URL(`${base}${altPath}`, site).toString() : undefined;
 ---
 
 <html lang={lang}>
@@ -21,14 +29,25 @@ const { lang, title, noindex = false } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href={`${import.meta.env.BASE_URL}favicon-32x32.png`} />
+    <link rel="icon" type="image/png" sizes="16x16" href={`${import.meta.env.BASE_URL}favicon-16x16.png`} />
+    <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL}apple-touch-icon.png`} />
     <title>{title}</title>
     {noindex && <meta name="robots" content="noindex" />}
+    {selfUrl && altUrl && (
+      <>
+        <link rel="alternate" hreflang={lang} href={selfUrl} />
+        <link rel="alternate" hreflang={altLang} href={altUrl} />
+        <link rel="alternate" hreflang="x-default" href={lang === 'es' ? selfUrl : altUrl} />
+      </>
+    )}
     <script is:inline>
       document.documentElement.classList.add('js');
     </script>
   </head>
   <body>
-    {!noindex && <AnnouncementBar />}
+    {!noindex && <AnnouncementBar lang={lang === 'en' ? 'en' : 'es'} />}
     <slot />
     <script>
       const hash = window.location.hash;

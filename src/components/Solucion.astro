@@ -1,6 +1,32 @@
 ---
 import DecorativeBlob from './DecorativeBlob.astro';
 import RepurposeArrowIcon from './icons/RepurposeArrowIcon.astro';
+
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const copy = {
+  es: {
+    heading: 'Le doy una segunda vida al contenido que ya tienes.',
+    body:
+      'Tomo el contenido que ya produjiste (posts de blog, reels, testimonios, guías, lead magnets) y lo rediseño en pines nuevos, optimizados con SEO de Pinterest, para que sigan trabajando por ti mucho después de publicados. Esto se llama repurposing, y es una de las formas más rentables de aprovechar el contenido que ya creaste sin duplicar tu carga de trabajo.',
+    secondary: 'Ver todos los servicios',
+    secondaryHref: `${base}servicios`,
+  },
+  en: {
+    heading: 'I give a second life to the content you already have.',
+    body:
+      'I take the content you already produced (blog posts, reels, testimonials, guides, lead magnets) and redesign it into new pins, optimized with Pinterest SEO, so they keep working for you long after they were published. This is called repurposing, and it is one of the most profitable ways to make the most of the content you already created without duplicating your workload.',
+    secondary: 'See all services',
+    secondaryHref: `${base}en/services`,
+  },
+};
+
+const t = copy[lang];
 ---
 
 <section class="solucion reveal">
@@ -11,19 +37,13 @@ import RepurposeArrowIcon from './icons/RepurposeArrowIcon.astro';
         <RepurposeArrowIcon size={26} />
       </div>
       <h2>
-        No creo contenido desde cero. Le doy una segunda vida al que ya
-        tienes.
+        {t.heading}
       </h2>
     </div>
     <p>
-      Tomo el contenido que ya produjiste (posts de blog, reels,
-      testimonios, guías, lead magnets) y lo rediseño en pines nuevos,
-      optimizados con SEO de Pinterest, para que sigan trabajando por ti
-      mucho después de publicados. Esto se llama repurposing, y es una de
-      las formas más rentables de aprovechar el contenido que ya creaste
-      sin duplicar tu carga de trabajo.
+      {t.body}
     </p>
-    <a class="solucion-secondary-link" href={`${import.meta.env.BASE_URL}servicios`}>Ver todos los servicios</a>
+    <a class="solucion-secondary-link" href={t.secondaryHref}>{t.secondary}</a>
   </div>
 </section>
 

@@ -1,10 +1,37 @@
 ---
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const WHATSAPP_URL = 'https://wa.me/+50767827835';
+
+const copy = {
+  es: {
+    headline: 'Tu contenido ya existe. Yo lo convierto en tráfico constante en Pinterest.',
+    subheadline:
+      'Ayudo a coaches, creadoras, podcasters y dueñas de negocio a transformar el contenido que ya publicaron (blogs, reels, guías, testimonios) en pines optimizados que Pinterest sigue mostrando durante meses, no días.',
+    cta: 'Hablemos de tu proyecto',
+    secondary: 'Conoce más sobre mí',
+    secondaryHref: `${base}sobre-mi`,
+  },
+  en: {
+    headline: 'Your content already exists. I turn it into consistent traffic on Pinterest.',
+    subheadline:
+      'I help coaches, creators, podcasters and business owners transform the content they already published (blogs, reels, guides, testimonials) into optimized pins that Pinterest keeps showing for months, not days.',
+    cta: "Let's talk about your project",
+    secondary: 'Learn more about me',
+    secondaryHref: `${base}en/about`,
+  },
+};
+
+const t = copy[lang];
 ---
 
 <section
   class="hero reveal"
-  style={`background-image: url(${base}images/fotos-perfil/foto-perfil-1.jpg);`}
+  style={`background-image: url(${base}images/fotos-perfil/foto-perfil-1-hero.jpg);`}
 >
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-inner">
@@ -16,22 +43,19 @@ const base = import.meta.env.BASE_URL;
       width="40"
       height="40"
     />
-    <h1>Tu contenido ya existe. Yo lo convierto en tráfico constante en Pinterest.</h1>
+    <h1>{t.headline}</h1>
     <p class="hero-subheadline">
-      Ayudo a coaches, creadoras, podcasters y dueñas de negocio a
-      transformar el contenido que ya publicaron (blogs, reels, guías,
-      testimonios) en pines optimizados que Pinterest sigue mostrando
-      durante meses, no días.
+      {t.subheadline}
     </p>
     <a
       class="cta-button"
-      href="https://wa.me/50767827835"
+      href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
     >
-      Agenda una llamada gratis <span aria-hidden="true">→</span>
+      {t.cta} <span aria-hidden="true">→</span>
     </a>
-    <a class="hero-secondary-link" href={`${base}sobre-mi`}>Conoce más sobre mí</a>
+    <a class="hero-secondary-link" href={t.secondaryHref}>{t.secondary}</a>
   </div>
 </section>
 
@@ -48,7 +72,7 @@ const base = import.meta.env.BASE_URL;
     position: absolute;
     inset: 0;
     background-color: var(--color-text);
-    opacity: 0.85;
+    opacity: 0.18;
   }
 
   .hero-inner {
@@ -56,6 +80,9 @@ const base = import.meta.env.BASE_URL;
     max-width: 720px;
     margin: 0 auto;
     text-align: center;
+    padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.5rem, 5vw, 2.5rem);
+    border-radius: 24px;
+    background-color: color-mix(in srgb, var(--color-text) 60%, transparent);
   }
 
   .hero-icon-mark {

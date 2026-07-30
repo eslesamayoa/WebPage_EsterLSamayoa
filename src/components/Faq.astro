@@ -1,22 +1,54 @@
 ---
 import QuestionIcon from './icons/QuestionIcon.astro';
 
-const faqs = [
-  {
-    pregunta: '¿Necesito tener ya una cuenta de Pinterest para empezar?',
-    respuesta: 'No, puedo ayudarte a crearla y configurarla desde cero.',
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+
+const copy = {
+  es: {
+    heading: 'Preguntas frecuentes',
+    faqs: [
+      {
+        pregunta: '¿Necesito tener ya una cuenta de Pinterest para empezar?',
+        respuesta: 'No, puedo ayudarte a crearla y configurarla desde cero.',
+      },
+      {
+        pregunta: '¿Necesito crear contenido nuevo para esto?',
+        respuesta:
+          'No necesariamente. Mi especialidad es tomar lo que ya tienes (blogs, reels, testimonios) y convertirlo en pines nuevos.',
+      },
+      {
+        pregunta: '¿Cuánto tiempo toma ver resultados?',
+        respuesta:
+          'Pinterest funciona distinto a otras redes. Los resultados suelen ser más lentos al inicio pero mucho más duraderos: un pin bien optimizado puede seguir generando tráfico meses después.',
+      },
+    ],
   },
-  {
-    pregunta: '¿Necesito crear contenido nuevo para esto?',
-    respuesta:
-      'No necesariamente. Mi especialidad es tomar lo que ya tienes (blogs, reels, testimonios) y convertirlo en pines nuevos.',
+  en: {
+    heading: 'Frequently asked questions',
+    faqs: [
+      {
+        pregunta: 'Do I need to already have a Pinterest account to start?',
+        respuesta: 'No, I can help you create and set it up from scratch.',
+      },
+      {
+        pregunta: 'Do I need to create new content for this?',
+        respuesta:
+          'Not necessarily. My specialty is taking what you already have (blogs, reels, testimonials) and turning it into new pins.',
+      },
+      {
+        pregunta: 'How long does it take to see results?',
+        respuesta:
+          'Pinterest works differently from other networks. Results tend to be slower at first but much more lasting: a well optimized pin can keep generating traffic months later.',
+      },
+    ],
   },
-  {
-    pregunta: '¿Cuánto tiempo toma ver resultados?',
-    respuesta:
-      'Pinterest funciona distinto a otras redes. Los resultados suelen ser más lentos al inicio pero mucho más duraderos: un pin bien optimizado puede seguir generando tráfico meses después.',
-  },
-];
+};
+
+const t = copy[lang];
 ---
 
 <section id="faq" class="faq-section reveal">
@@ -25,11 +57,11 @@ const faqs = [
       <div class="faq-icon-badge">
         <QuestionIcon size={26} />
       </div>
-      <h2>Preguntas frecuentes</h2>
+      <h2>{t.heading}</h2>
     </div>
 
     <div class="faq-list">
-      {faqs.map(({ pregunta, respuesta }) => (
+      {t.faqs.map(({ pregunta, respuesta }) => (
         <details class="faq-item">
           <summary class="faq-question">
             <span>{pregunta}</span>

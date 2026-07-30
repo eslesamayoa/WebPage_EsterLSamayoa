@@ -1,17 +1,35 @@
 ---
-const WHATSAPP_URL = 'https://wa.me/50767827835';
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+const WHATSAPP_URL = 'https://wa.me/+50767827835';
+
+const copy = {
+  es: {
+    question: '¿Tienes contenido listo para convertir en tráfico?',
+    cta: 'Hablemos de tu proyecto',
+  },
+  en: {
+    question: 'Do you have content ready to turn into traffic?',
+    cta: "Let's talk about your project",
+  },
+};
+
+const t = copy[lang];
 ---
 
 <section class="repeated-cta reveal">
   <div class="repeated-cta-inner">
-    <p>¿Tienes contenido listo para convertir en tráfico?</p>
+    <p>{t.question}</p>
     <a
       class="repeated-cta-button"
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
     >
-      Agenda una llamada gratis
+      {t.cta}
     </a>
   </div>
 </section>

@@ -1,13 +1,13 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
 
 const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout lang="es" title="Sobre mí, Esther L. Samayoa" path="sobre-mi" altPath="en/about">
-  <Header lang="es" altHref={`${base}en/about`} />
+<BaseLayout lang="en" title="About, Esther L. Samayoa" path="en/about" altPath="sobre-mi">
+  <Header lang="en" altHref={`${base}sobre-mi`} />
 
   <main>
     <section class="sobre-mi-section reveal">
@@ -21,23 +21,22 @@ const base = import.meta.env.BASE_URL;
           />
         </div>
         <div class="sobre-mi-content">
-          <p class="sobre-mi-eyebrow">Conóceme</p>
-          <h1>Convierto tu contenido en tráfico que no se detiene.</h1>
+          <p class="sobre-mi-eyebrow">Get to know me</p>
+          <h1>I turn your content into traffic that never stops.</h1>
           <p class="sobre-mi-bio">
-            Soy Esther L. Samayoa, Pinterest Manager especializada en
-            repurposing de contenido para coaches y podcasters. Ustedes
-            crean contenido increíble, y después lo ven desaparecer en un
-            feed en menos de 48 horas. Yo tomo ese contenido (episodios
-            de podcast, publicaciones de blog, contenido de redes) y lo
-            convierto en un motor de crecimiento en Pinterest que sigue
-            funcionando mucho después de que el post original
-            desapareció, todo de forma asíncrona. Ayudo a coaches y
-            podcasters con estrategia y gestión de Pinterest, repurposing
-            de contenido, y soporte en inglés, español e italiano. Mi
-            manera de trabajar es 100% asíncrona: sin llamadas, sin
-            horario fijo, solo entregables claros y comunicación
-            constante, para que te enfoques en crear mientras tu canal de
-            Pinterest sigue creciendo en segundo plano.
+            I am Esther L. Samayoa, a Pinterest Manager specialized in
+            content repurposing for coaches and podcasters. You create
+            amazing content, and then watch it disappear from a feed in
+            less than 48 hours. I take that content (podcast episodes,
+            blog posts, social media content) and turn it into a growth
+            engine on Pinterest that keeps working long after the
+            original post disappeared, all fully asynchronously. I help
+            coaches and podcasters with Pinterest strategy and
+            management, content repurposing, and support in English,
+            Spanish and Italian. My way of working is 100% asynchronous:
+            no calls, no fixed schedule, just clear deliverables and
+            constant communication, so you can focus on creating while
+            your Pinterest channel keeps growing in the background.
           </p>
           <a
             class="linkedin-cta"
@@ -45,14 +44,14 @@ const base = import.meta.env.BASE_URL;
             target="_blank"
             rel="noopener noreferrer"
           >
-            Conecta conmigo en LinkedIn
+            Connect with me on LinkedIn
           </a>
         </div>
       </div>
     </section>
   </main>
 
-  <Footer lang="es" />
+  <Footer lang="en" />
 </BaseLayout>
 
 <style>

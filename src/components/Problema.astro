@@ -1,5 +1,27 @@
 ---
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
 const base = import.meta.env.BASE_URL;
+
+const copy = {
+  es: {
+    highlight: 'Pinterest no es una red social, es un motor de búsqueda.',
+    lead: 'Y la mayoría lo está usando mal.',
+    body:
+      'Crear contenido toma tiempo. Publicarlo una sola vez y dejarlo morir en el feed de Instagram también es un desperdicio. Pinterest funciona distinto: un pin bien hecho puede seguir generando tráfico semanas o meses después de publicado. El problema es que administrar Pinterest bien (investigar palabras clave, diseñar pines, programar, medir resultados) requiere tiempo que como dueña de negocio simplemente no tienes.',
+  },
+  en: {
+    highlight: 'Pinterest is not a social network, it is a search engine.',
+    lead: 'And most people are using it wrong.',
+    body:
+      'Creating content takes time. Publishing it once and letting it die in the Instagram feed is also a waste. Pinterest works differently: a well made pin can keep generating traffic weeks or months after it was published. The problem is that managing Pinterest well (researching keywords, designing pins, scheduling, measuring results) takes time that as a business owner you simply do not have.',
+  },
+};
+
+const t = copy[lang];
 ---
 
 <section class="problema reveal">
@@ -13,17 +35,11 @@ const base = import.meta.env.BASE_URL;
     />
     <div class="problema-content">
       <h2 class="problema-highlight">
-        Pinterest no es una red social, es un motor de búsqueda.
+        {t.highlight}
       </h2>
-      <p class="problema-lead">Y la mayoría lo está usando mal.</p>
+      <p class="problema-lead">{t.lead}</p>
       <p class="problema-body">
-        Crear contenido toma tiempo. Publicarlo una sola vez y dejarlo
-        morir en el feed de Instagram también es un desperdicio. Pinterest
-        funciona distinto: un pin bien hecho puede seguir generando
-        tráfico semanas o meses después de publicado. El problema es que
-        administrar Pinterest bien (investigar palabras clave, diseñar
-        pines, programar, medir resultados) requiere tiempo que como
-        dueña de negocio simplemente no tienes.
+        {t.body}
       </p>
     </div>
   </div>

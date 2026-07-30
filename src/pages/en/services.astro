@@ -1,12 +1,12 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import SearchTrendIcon from '../components/icons/SearchTrendIcon.astro';
-import RepurposeArrowIcon from '../components/icons/RepurposeArrowIcon.astro';
-import ChartUpIcon from '../components/icons/ChartUpIcon.astro';
-import HandsLaptopIcon from '../components/icons/HandsLaptopIcon.astro';
-import CalendarCheckIcon from '../components/icons/CalendarCheckIcon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import SearchTrendIcon from '../../components/icons/SearchTrendIcon.astro';
+import RepurposeArrowIcon from '../../components/icons/RepurposeArrowIcon.astro';
+import ChartUpIcon from '../../components/icons/ChartUpIcon.astro';
+import HandsLaptopIcon from '../../components/icons/HandsLaptopIcon.astro';
+import CalendarCheckIcon from '../../components/icons/CalendarCheckIcon.astro';
 
 const base = import.meta.env.BASE_URL;
 const WHATSAPP_URL = 'https://wa.me/50767827835';
@@ -14,39 +14,39 @@ const WHATSAPP_URL = 'https://wa.me/50767827835';
 const servicios = [
   {
     Icon: SearchTrendIcon,
-    titulo: 'Auditoría + Optimización de Perfil',
+    titulo: 'Audit + Profile Optimization',
     texto:
-      'Reviso tu cuenta actual, corrijo tu bio, tableros y configuración para que Pinterest empiece a mostrarte a la audiencia correcta desde el día uno.',
+      'I review your current account, fix your bio, boards and settings so Pinterest starts showing you to the right audience from day one.',
   },
   {
     Icon: RepurposeArrowIcon,
-    titulo: 'Repurposing Mensual de Contenido',
+    titulo: 'Monthly Content Repurposing',
     texto:
-      'Cada mes, tomo tu contenido existente y lo transformo en un set de pines nuevos, con descripciones optimizadas por palabra clave y diseño alineado a tu marca.',
+      'Every month, I take your existing content and turn it into a new set of pins, with keyword optimized descriptions and design aligned to your brand.',
   },
   {
     Icon: ChartUpIcon,
-    titulo: 'Gestión Completa de Pinterest',
+    titulo: 'Full Pinterest Management',
     texto:
-      'Estrategia, diseño, programación y reportes de resultados. Tú sigues creando contenido en tus otras plataformas, yo me encargo de que Pinterest trabaje para ti en piloto automático.',
+      'Strategy, design, scheduling and results reports. You keep creating content on your other platforms, I make sure Pinterest works for you on autopilot.',
   },
 ];
 
 const pasos = [
   {
     Icon: HandsLaptopIcon,
-    titulo: 'Envías tu contenido existente',
-    texto: 'Blogs, reels, guías, testimonios, lo que ya tengas.',
+    titulo: 'You send your existing content',
+    texto: 'Blogs, reels, guides, testimonials, whatever you already have.',
   },
   {
     Icon: SearchTrendIcon,
-    titulo: 'Investigo y diseño',
-    texto: 'Busco las palabras clave correctas y creo los pines.',
+    titulo: 'I research and design',
+    texto: 'I find the right keywords and create the pins.',
   },
   {
     Icon: CalendarCheckIcon,
-    titulo: 'Programo y reporto',
-    texto: 'Todo publicado en tu cuenta con reportes claros de resultados.',
+    titulo: 'I schedule and report',
+    texto: 'Everything published on your account with clear results reports.',
   },
 ];
 
@@ -60,13 +60,13 @@ const herramientas = [
 const herramientasLoop = [...herramientas, ...herramientas];
 ---
 
-<BaseLayout lang="es" title="Servicios de Esther Levy" path="servicios" altPath="en/services">
-  <Header lang="es" altHref={`${base}en/services`} />
+<BaseLayout lang="en" title="Esther Levy Services" path="en/services" altPath="servicios">
+  <Header lang="en" altHref={`${base}servicios`} />
 
   <main>
     <section class="servicios-section reveal">
       <div class="section-inner">
-        <h1>Cómo puedo ayudarte</h1>
+        <h1>How I can help you</h1>
         <div class="servicios-grid">
           {servicios.map(({ Icon, titulo, texto }) => (
             <div class="servicio-card">
@@ -85,7 +85,7 @@ const herramientasLoop = [...herramientas, ...herramientas];
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Contáctanos <span aria-hidden="true">→</span>
+                Contact us <span aria-hidden="true">→</span>
               </a>
             </div>
           ))}
@@ -98,7 +98,7 @@ const herramientasLoop = [...herramientas, ...herramientas];
             target="_blank"
             rel="noopener noreferrer"
           >
-            Hablemos de tu proyecto
+            Let's talk about your project
           </a>
         </div>
       </div>
@@ -106,7 +106,7 @@ const herramientasLoop = [...herramientas, ...herramientas];
 
     <section class="proceso-section reveal">
       <div class="section-inner">
-        <h2>Así de simple es empezar</h2>
+        <h2>Getting started is this simple</h2>
         <div class="proceso-steps">
           {pasos.map(({ Icon, titulo, texto }, index) => (
             <div class="proceso-step">
@@ -141,7 +141,7 @@ const herramientasLoop = [...herramientas, ...herramientas];
     </section>
   </main>
 
-  <Footer lang="es" />
+  <Footer lang="en" />
 </BaseLayout>
 
 <style>

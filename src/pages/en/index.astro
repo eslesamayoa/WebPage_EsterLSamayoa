@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import Problema from '../../components/Problema.astro';
+import Solucion from '../../components/Solucion.astro';
+import RepeatedCta from '../../components/RepeatedCta.astro';
+import Faq from '../../components/Faq.astro';
+import Contacto from '../../components/Contacto.astro';
+import Footer from '../../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout lang="en" title="Esther Levy" path="en/" altPath="">
+  <Header lang="en" altHref={base} />
+  <Hero lang="en" />
+  <Problema lang="en" />
+  <Solucion lang="en" />
+  <RepeatedCta lang="en" />
+  <Faq lang="en" />
+  <Contacto lang="en" />
+  <Footer lang="en" />
+</BaseLayout>

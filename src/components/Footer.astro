@@ -1,26 +1,54 @@
 ---
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const WHATSAPP_URL = 'https://wa.me/+50767827835';
+
+const copy = {
+  es: {
+    ariaLinks: 'Enlaces rápidos',
+    servicios: 'Servicios',
+    sobreMi: 'Sobre mí',
+    faq: 'Preguntas frecuentes',
+    servicesHref: `${base}servicios`,
+    aboutHref: `${base}sobre-mi`,
+    faqHref: `${base}#faq`,
+    cta: 'Hablemos de tu proyecto',
+  },
+  en: {
+    ariaLinks: 'Quick links',
+    servicios: 'Services',
+    sobreMi: 'About',
+    faq: 'FAQ',
+    servicesHref: `${base}en/services`,
+    aboutHref: `${base}en/about`,
+    faqHref: `${base}en/#faq`,
+    cta: "Let's talk about your project",
+  },
+};
+
+const t = copy[lang];
 ---
 
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo-card">
-        <img
-          src={`${base}images/brand/footer-logo-vertical.png`}
-          alt="Esther L. Samayoa"
-          width="260"
-          height="225"
-        />
-      </div>
-      <p class="footer-tagline">Pinterest Manager para coaches y podcasters</p>
+      <img
+        class="footer-logo"
+        src={`${base}images/brand/footer-logo-vertical.png`}
+        alt="Esther L. Samayoa"
+        width="1254"
+        height="1254"
+      />
     </div>
 
-    <nav class="footer-links" aria-label="Enlaces rápidos">
-      <a href={`${base}servicios`}>Servicios</a>
-      <a href={`${base}sobre-mi`}>Sobre mí</a>
-      <a href={`${base}#faq`}>Preguntas frecuentes</a>
+    <nav class="footer-links" aria-label={t.ariaLinks}>
+      <a href={t.servicesHref}>{t.servicios}</a>
+      <a href={t.aboutHref}>{t.sobreMi}</a>
+      <a href={t.faqHref}>{t.faq}</a>
     </nav>
 
     <div class="footer-cta">
@@ -30,7 +58,7 @@ const WHATSAPP_URL = 'https://wa.me/+50767827835';
         target="_blank"
         rel="noopener noreferrer"
       >
-        Agenda tu llamada
+        {t.cta}
       </a>
     </div>
   </div>
@@ -60,28 +88,12 @@ const WHATSAPP_URL = 'https://wa.me/+50767827835';
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.9rem;
   }
 
-  .footer-logo-card {
-    display: inline-flex;
-    background-color: var(--color-surface);
-    border-radius: 12px;
-    padding: 0.75rem 1rem;
-  }
-
-  .footer-logo-card img {
-    width: 72px;
+  .footer-logo {
+    display: block;
+    width: 96px;
     height: auto;
-  }
-
-  .footer-tagline {
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.75);
-    max-width: 220px;
   }
 
   .footer-links {

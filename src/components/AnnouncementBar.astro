@@ -1,9 +1,42 @@
 ---
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+
+const phrasesByLang = {
+  es: ['100% Async', 'Sin llamadas', 'Trilingüe'],
+  en: ['100% Async', 'No calls', 'Trilingual'],
+};
+
+const phrases = phrasesByLang[lang];
 ---
 
 <div class="announcement-bar">
-  <p>100% Async</p>
+  <div class="announcement-viewport">
+    {phrases.map((phrase, index) => (
+      <p class="announcement-phrase" data-active={index === 0 ? 'true' : 'false'}>{phrase}</p>
+    ))}
+  </div>
 </div>
+
+<script>
+  const bar = document.querySelector('.announcement-bar');
+  const phrases = bar ? Array.from(bar.querySelectorAll('.announcement-phrase')) : [];
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
+  if (!prefersReducedMotion && phrases.length > 1) {
+    let current = 0;
+    setInterval(() => {
+      phrases[current].removeAttribute('data-active');
+      current = (current + 1) % phrases.length;
+      phrases[current].setAttribute('data-active', 'true');
+    }, 2800);
+  }
+</script>
 
 <style>
   .announcement-bar {
@@ -13,12 +46,23 @@
     background-color: var(--color-accent-strong);
   }
 
-  .announcement-bar p {
-    margin: 0;
+  .announcement-viewport {
+    display: grid;
     padding: 0.875rem 1rem;
+  }
+
+  .announcement-phrase {
+    grid-area: 1 / 1;
+    margin: 0;
     text-align: center;
     font-family: var(--font-body);
     font-size: 0.8rem;
     color: var(--color-cta-text);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .announcement-phrase[data-active='true'] {
+    opacity: 1;
   }
 </style>

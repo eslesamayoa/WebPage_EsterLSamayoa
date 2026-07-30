@@ -1,20 +1,39 @@
 ---
 import DecorativeBlob from './DecorativeBlob.astro';
 
-const WHATSAPP_URL = 'https://wa.me/50767827835';
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+const WHATSAPP_URL = 'https://wa.me/+50767827835';
+const sectionId = lang === 'es' ? 'contacto' : 'contact';
+
+const copy = {
+  es: {
+    heading: '¿Lista para que tu contenido trabaje más, no que tú trabajes más?',
+    cta: 'Hablemos de tu proyecto',
+  },
+  en: {
+    heading: 'Ready for your content to work harder, not you?',
+    cta: "Let's talk about your project",
+  },
+};
+
+const t = copy[lang];
 ---
 
-<section id="contacto" class="contacto-section reveal">
+<section id={sectionId} class="contacto-section reveal">
   <DecorativeBlob color="var(--color-accent)" opacity={0.35} />
   <div class="contacto-inner">
-    <h2>¿Lista para que tu contenido trabaje más, no que tú trabajes más?</h2>
+    <h2>{t.heading}</h2>
     <a
       class="contacto-cta"
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
     >
-      Agenda tu llamada gratis
+      {t.cta}
     </a>
   </div>
 </section>

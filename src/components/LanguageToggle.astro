@@ -1,0 +1,45 @@
+---
+interface Props {
+  lang: 'es' | 'en';
+  altHref: string;
+}
+
+const { lang, altHref } = Astro.props;
+const currentLabel = lang === 'es' ? 'ES' : 'EN';
+const otherLabel = lang === 'es' ? 'EN' : 'ES';
+---
+
+<div class="language-toggle" role="group" aria-label="Language">
+  <span class="lang-current" aria-current="true">{currentLabel}</span>
+  <span class="lang-divider" aria-hidden="true">|</span>
+  <a class="lang-link" href={altHref}>{otherLabel}</a>
+</div>
+
+<style>
+  .language-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .lang-current {
+    color: var(--color-text);
+  }
+
+  .lang-divider {
+    color: var(--color-border);
+  }
+
+  .lang-link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .lang-link:hover {
+    color: var(--color-accent-strong);
+    text-decoration: underline;
+  }
+</style>
