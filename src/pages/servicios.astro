@@ -1,17 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import SearchTrendIcon from '../components/icons/SearchTrendIcon.astro';
 import RepurposeArrowIcon from '../components/icons/RepurposeArrowIcon.astro';
 import ChartUpIcon from '../components/icons/ChartUpIcon.astro';
-import ChatBubbleIcon from '../components/icons/ChatBubbleIcon.astro';
 import HandsLaptopIcon from '../components/icons/HandsLaptopIcon.astro';
 import CalendarCheckIcon from '../components/icons/CalendarCheckIcon.astro';
-import PaletteIcon from '../components/icons/PaletteIcon.astro';
-import GridScheduleIcon from '../components/icons/GridScheduleIcon.astro';
-import QueueStackIcon from '../components/icons/QueueStackIcon.astro';
-import BarChartIcon from '../components/icons/BarChartIcon.astro';
 
+const base = import.meta.env.BASE_URL;
 const WHATSAPP_URL = 'https://wa.me/50767827835';
 
 const servicios = [
@@ -37,11 +34,6 @@ const servicios = [
 
 const pasos = [
   {
-    Icon: ChatBubbleIcon,
-    titulo: 'Llamada de descubrimiento',
-    texto: 'Hablamos de tu negocio, tu audiencia y tus metas.',
-  },
-  {
     Icon: HandsLaptopIcon,
     titulo: 'Envías tu contenido existente',
     texto: 'Blogs, reels, guías, testimonios, lo que ya tengas.',
@@ -59,11 +51,13 @@ const pasos = [
 ];
 
 const herramientas = [
-  { Icon: PaletteIcon, nombre: 'Canva' },
-  { Icon: GridScheduleIcon, nombre: 'Tailwind App' },
-  { Icon: QueueStackIcon, nombre: 'Buffer' },
-  { Icon: BarChartIcon, nombre: 'Pinterest Analytics' },
+  { nombre: 'Canva', src: 'images/brand/tools/canva-logo.png' },
+  { nombre: 'Tailwind App', src: 'images/brand/tools/tailwind-logo.svg' },
+  { nombre: 'Buffer', src: 'images/brand/tools/buffer-logo.png' },
+  { nombre: 'Pinterest', src: 'images/brand/pinterest-logo.svg' },
 ];
+
+const herramientasLoop = [...herramientas, ...herramientas];
 ---
 
 <BaseLayout lang="es" title="Servicios de Esther Levy">
@@ -86,15 +80,26 @@ const herramientas = [
                 </div>
               </div>
               <a
-                class="servicio-cta"
+                class="servicio-link"
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Contáctanos
+                Contáctanos <span aria-hidden="true">→</span>
               </a>
             </div>
           ))}
+        </div>
+
+        <div class="servicios-main-cta-wrap">
+          <a
+            class="servicios-main-cta"
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Agenda tu llamada gratis
+          </a>
         </div>
       </div>
     </section>
@@ -120,17 +125,24 @@ const herramientas = [
     <section class="herramientas-section reveal">
       <div class="section-inner">
         <h2 class="herramientas-heading">Las herramientas que uso</h2>
-        <div class="herramientas-row">
-          {herramientas.map(({ Icon, nombre }) => (
-            <div class="herramienta-badge">
-              <Icon size={20} />
-              <span>{nombre}</span>
-            </div>
-          ))}
+        <div class="herramientas-marquee">
+          <div class="marquee-track">
+            {herramientasLoop.map(({ nombre, src }, index) => (
+              <div class="herramienta-logo-card" aria-hidden={index >= herramientas.length}>
+                <img
+                  src={`${base}${src}`}
+                  alt={index < herramientas.length ? nombre : ''}
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   </main>
+
+  <Footer />
 </BaseLayout>
 
 <style>
@@ -171,6 +183,7 @@ const herramientas = [
     border: 1px solid var(--color-border);
     border-radius: 12px;
     padding: 1.75rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
   }
 
   .servicio-icon-badge {
@@ -184,11 +197,13 @@ const herramientas = [
     border: 1px solid var(--color-border);
     color: var(--color-accent);
     margin-bottom: 1.25rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   }
 
   .servicio-card h3 {
     font-size: 1.2rem;
     margin: 0 0 0.75rem;
+    transition: color 0.3s ease;
   }
 
   .servicio-desc-wrap {
@@ -206,6 +221,24 @@ const herramientas = [
     line-height: 1.6;
     color: var(--color-text);
     margin: 0 0 1.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .servicio-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: auto;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .servicio-link:hover {
+    text-decoration: underline;
   }
 
   /* On devices with real hover (desktop mouse), the description starts
@@ -221,25 +254,53 @@ const herramientas = [
     .servicio-card:focus-within .servicio-desc-wrap {
       grid-template-rows: 1fr;
     }
+
+    .servicio-card:hover,
+    .servicio-card:focus-within {
+      background-color: var(--color-accent-strong);
+      border-color: var(--color-accent-strong);
+    }
+
+    .servicio-card:hover h3,
+    .servicio-card:focus-within h3,
+    .servicio-card:hover p,
+    .servicio-card:focus-within p,
+    .servicio-card:hover .servicio-link,
+    .servicio-card:focus-within .servicio-link {
+      color: var(--color-cta-text);
+    }
+
+    .servicio-card:hover .servicio-icon-badge,
+    .servicio-card:focus-within .servicio-icon-badge {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.4);
+      color: var(--color-cta-text);
+    }
   }
 
-  .servicio-cta {
+  .servicios-main-cta-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+
+  .servicios-main-cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-body);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 1rem;
     background-color: var(--color-accent-strong);
     color: var(--color-cta-text);
     border-radius: 999px;
-    padding: 0.7rem 1.5rem;
+    padding: 0.9rem 2.25rem;
     text-decoration: none;
-    min-height: 44px;
+    min-height: 48px;
     transition: filter 0.15s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .servicio-cta:hover {
+  .servicios-main-cta:hover {
     filter: brightness(0.9);
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
@@ -305,27 +366,72 @@ const herramientas = [
     margin-bottom: 1.75rem;
   }
 
-  .herramientas-row {
+  .herramientas-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+  }
+
+  .marquee-track {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .herramienta-badge {
-    display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
-    padding: 0.6rem 1.1rem;
-    color: var(--color-text);
-    font-size: 0.9rem;
+    gap: 3.5rem;
+    width: max-content;
+    animation: marquee-scroll 22s linear infinite;
   }
 
-  .herramienta-badge :global(svg) {
-    color: var(--color-accent-strong);
+  .herramientas-marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .herramienta-logo-card {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+  }
+
+  .herramienta-logo-card img {
+    height: 100%;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      gap: 2.5rem;
+    }
+
+    .herramienta-logo-card[aria-hidden='true'] {
+      display: none;
+    }
   }
 
   @media (max-width: 700px) {

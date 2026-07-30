@@ -1,18 +1,22 @@
 ---
-import ChartUpIcon from './icons/ChartUpIcon.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <section class="problema reveal">
   <div class="problema-inner">
-    <div class="problema-icon-badge">
-      <ChartUpIcon size={28} />
-    </div>
+    <img
+      class="problema-logo"
+      src={`${base}images/brand/pinterest-logo.svg`}
+      alt="Pinterest"
+      width="56"
+      height="56"
+    />
     <div class="problema-content">
-      <h2>
-        Pinterest no es una red social, es un motor de búsqueda. Y la
-        mayoría lo está usando mal.
+      <h2 class="problema-highlight">
+        Pinterest no es una red social, es un motor de búsqueda.
       </h2>
-      <p>
+      <p class="problema-lead">Y la mayoría lo está usando mal.</p>
+      <p class="problema-body">
         Crear contenido toma tiempo. Publicarlo una sola vez y dejarlo
         morir en el feed de Instagram también es un desperdicio. Pinterest
         funciona distinto: un pin bien hecho puede seguir generando
@@ -27,10 +31,8 @@ import ChartUpIcon from './icons/ChartUpIcon.astro';
 
 <style>
   .problema {
-    background-color: var(--color-surface);
+    background-color: color-mix(in srgb, var(--color-primary) 25%, var(--color-bg));
     padding: 4rem 1.25rem;
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
   }
 
   .problema-inner {
@@ -41,32 +43,34 @@ import ChartUpIcon from './icons/ChartUpIcon.astro';
     gap: 1.5rem;
   }
 
-  .problema-icon-badge {
+  .problema-logo {
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 56px;
     height: 56px;
-    border-radius: 50%;
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    color: var(--color-accent);
   }
 
-  .problema h2 {
+  .problema-highlight {
     font-family: var(--font-heading);
-    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-size: clamp(1.75rem, 4.5vw, 2.5rem);
     line-height: 1.25;
-    color: var(--color-text);
-    margin: 0 0 1.5rem;
+    color: var(--color-accent-strong);
+    margin: 0 0 0.75rem;
   }
 
-  .problema p {
+  .problema-lead {
     font-family: var(--font-body);
-    font-size: clamp(1rem, 1.8vw, 1.1rem);
-    line-height: 1.7;
+    font-weight: 700;
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+    line-height: 1.5;
     color: var(--color-text);
+    margin: 0 0 1rem;
+  }
+
+  .problema-body {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    line-height: 1.7;
+    color: var(--color-text-muted);
     margin: 0;
   }
 
