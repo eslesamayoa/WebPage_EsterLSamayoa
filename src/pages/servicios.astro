@@ -555,12 +555,13 @@ const herramientasLoop = [...herramientas, ...herramientas];
     border-radius: 12px;
     padding: 1.75rem 1.5rem;
     box-shadow: 0 8px 30px rgba(78, 74, 87, 0.08);
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
   }
 
   @media (hover: hover) and (pointer: fine) {
     .proceso-step:hover {
       box-shadow: 0 4px 40px rgba(78, 74, 87, 0.12);
+      transform: translateY(-4px);
     }
   }
 
