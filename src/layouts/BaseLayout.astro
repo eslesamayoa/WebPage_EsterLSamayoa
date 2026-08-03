@@ -69,7 +69,7 @@ const altUrl = site && altPath !== undefined ? new URL(`${base}${altPath}`, site
       const prefersReducedMotion = window.matchMedia(
         '(prefers-reduced-motion: reduce)'
       ).matches;
-      const revealEls = document.querySelectorAll('.reveal');
+      const revealEls = document.querySelectorAll('.reveal, .reveal-card');
 
       if (prefersReducedMotion || !('IntersectionObserver' in window)) {
         revealEls.forEach((el) => el.classList.add('is-visible'));
@@ -116,6 +116,21 @@ const altUrl = site && altPath !== undefined ? new URL(`${base}${altPath}`, site
     will-change: auto;
   }
 
+  /* Scroll zoom: same reveal machinery, used on individual cards for a
+     more noticeable scale change instead of the section level slide. */
+  html.js .reveal-card {
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    will-change: opacity, transform;
+  }
+
+  html.js .reveal-card.is-visible {
+    opacity: 1;
+    transform: scale(1);
+    will-change: auto;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     * {
       transition-duration: 0.01ms !important;
@@ -124,6 +139,11 @@ const altUrl = site && altPath !== undefined ? new URL(`${base}${altPath}`, site
     }
 
     html.js .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    html.js .reveal-card {
       opacity: 1;
       transform: none;
     }

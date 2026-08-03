@@ -120,7 +120,7 @@ const herramientasLoop = [...herramientas, ...herramientas];
         <h1>How I can help you</h1>
         <div class="servicios-grid">
           {servicios.map(({ Icon, titulo, texto }) => (
-            <div class="servicio-card">
+            <div class="servicio-card reveal-card">
               <div class="servicio-icon-badge">
                 <Icon size={28} />
               </div>
@@ -161,7 +161,7 @@ const herramientasLoop = [...herramientas, ...herramientas];
         <p class="precios-subtitulo">Price per piece of content (one off)</p>
         <div class="precios-grid">
           {planes.map(({ nombre, precio, sufijo, destacado, idealPara, filas }) => (
-            <div class="precio-card">
+            <div class="precio-card reveal-card">
               {destacado && <span class="precio-badge">Most popular</span>}
               <p class="precio-nombre">{nombre}</p>
               <p class="precio-monto">
@@ -191,7 +191,7 @@ const herramientasLoop = [...herramientas, ...herramientas];
         <h2>Getting started is this simple</h2>
         <div class="proceso-steps">
           {pasos.map(({ Icon, titulo, texto }, index) => (
-            <div class="proceso-step">
+            <div class="proceso-step reveal-card">
               <p class="proceso-number">{String(index + 1).padStart(2, '0')}</p>
               <div class="proceso-icon-badge">
                 <Icon size={26} />
