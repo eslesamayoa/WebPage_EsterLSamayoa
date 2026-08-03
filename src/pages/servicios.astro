@@ -32,6 +32,57 @@ const servicios = [
   },
 ];
 
+const planes = [
+  {
+    nombre: 'STARTER',
+    precio: '$150',
+    sufijo: '/ pieza',
+    destacado: false,
+    idealPara: 'Coaches/podcasters que recién empiezan a repurposear contenido',
+    filas: [
+      ['Pines de Pinterest', '5 pines (imagen + copy)'],
+      ['Captions sociales', '3 (Instagram / LinkedIn)'],
+      ['Newsletter', '—'],
+      ['Quote graphics (copy)', '—'],
+      ['Tiempo de entrega', '3 días hábiles'],
+      ['Rondas de revisión', '1'],
+      ['Modalidad', '100% async, sin llamadas'],
+    ],
+  },
+  {
+    nombre: 'GROWTH',
+    precio: '$200',
+    sufijo: '/ pieza',
+    destacado: true,
+    idealPara: 'Creadores que publican contenido regularmente y quieren presencia multicanal',
+    filas: [
+      ['Pines de Pinterest', '8 pines optimizados con keywords'],
+      ['Captions sociales', '5 (Instagram / LinkedIn / X)'],
+      ['Newsletter', '1 blurb para email'],
+      ['Quote graphics (copy)', '—'],
+      ['Tiempo de entrega', '4 días hábiles'],
+      ['Rondas de revisión', '1'],
+      ['Modalidad', '100% async, sin llamadas'],
+    ],
+  },
+  {
+    nombre: 'FULL REPURPOSING',
+    precio: '$250',
+    sufijo: '/ pieza',
+    destacado: false,
+    idealPara: 'Marcas establecidas que quieren máxima visibilidad de cada pieza de contenido',
+    filas: [
+      ['Pines de Pinterest', '12 pines optimizados + sugerencia de tablero'],
+      ['Captions sociales', 'Paquete completo, carrusel IG + captions, post LinkedIn, hilo de X'],
+      ['Newsletter', '1 blurb para email'],
+      ['Quote graphics (copy)', '3 quotes extraídas de la pieza'],
+      ['Tiempo de entrega', '5 días hábiles'],
+      ['Rondas de revisión', '2'],
+      ['Modalidad', '100% async, sin llamadas'],
+    ],
+  },
+];
+
 const pasos = [
   {
     Icon: HandsLaptopIcon,
@@ -101,6 +152,37 @@ const herramientasLoop = [...herramientas, ...herramientas];
             Hablemos de tu proyecto
           </a>
         </div>
+      </div>
+    </section>
+
+    <section class="precios-section reveal">
+      <div class="section-inner">
+        <h2>Content Repurposing — Paquetes y Precios</h2>
+        <p class="precios-subtitulo">Precio por pieza de contenido (one off)</p>
+        <div class="precios-grid">
+          {planes.map(({ nombre, precio, sufijo, destacado, idealPara, filas }) => (
+            <div class="precio-card">
+              {destacado && <span class="precio-badge">Más popular</span>}
+              <p class="precio-nombre">{nombre}</p>
+              <p class="precio-monto">
+                <span class="precio-cifra">{precio}</span>
+                <span class="precio-sufijo">{sufijo}</span>
+              </p>
+              <p class="precio-ideal"><strong>Ideal para:</strong> {idealPara}</p>
+              <ul class="precio-filas">
+                {filas.map(([label, valor]) => (
+                  <li class="precio-fila">
+                    <span class="precio-fila-label">{label}</span>
+                    <span class="precio-fila-valor">{valor}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p class="precios-footnote">
+          Paquetes recurrentes o mensuales disponibles bajo pedido. Precios en USD. Comunicación vía Upwork o Telegram, sin llamadas.
+        </p>
       </div>
     </section>
 
@@ -179,10 +261,11 @@ const herramientasLoop = [...herramientas, ...herramientas];
     flex-direction: column;
     align-items: flex-start;
     background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
+    border: 1px solid rgba(78, 74, 87, 0.08);
     border-radius: 12px;
     padding: 1.75rem;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 8px 30px rgba(78, 74, 87, 0.08);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
   .servicio-icon-badge {
@@ -258,6 +341,7 @@ const herramientasLoop = [...herramientas, ...herramientas];
     .servicio-card:focus-within {
       background-color: var(--color-accent-strong);
       border-color: var(--color-accent-strong);
+      box-shadow: 0 4px 40px rgba(78, 74, 87, 0.12);
     }
 
     .servicio-card:hover h3,
@@ -305,6 +389,152 @@ const herramientasLoop = [...herramientas, ...herramientas];
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   }
 
+  /* Precios */
+  .precios-section {
+    background-color: var(--color-bg);
+  }
+
+  .precios-section .section-inner {
+    padding-top: 0;
+  }
+
+  .precios-section h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .precios-subtitulo {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    margin: 0 0 2.5rem;
+  }
+
+  .precios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .precio-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-surface);
+    border: 1px solid rgba(78, 74, 87, 0.08);
+    border-radius: 12px;
+    padding: 2rem 1.75rem 1.75rem;
+    box-shadow: 0 8px 30px rgba(78, 74, 87, 0.08);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .precio-card:hover {
+      border-color: var(--color-accent);
+      box-shadow: 0 4px 40px rgba(78, 74, 87, 0.12);
+      transform: translateY(-4px);
+    }
+  }
+
+  .precio-badge {
+    position: absolute;
+    top: -0.9rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-accent);
+    color: var(--color-cta-text);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .precio-nombre {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    text-align: center;
+    margin: 0 0 0.75rem;
+  }
+
+  .precio-monto {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.35rem;
+    margin: 0 0 1rem;
+  }
+
+  .precio-cifra {
+    font-family: var(--font-heading);
+    font-size: clamp(2.25rem, 5vw, 2.75rem);
+    color: var(--color-text);
+  }
+
+  .precio-sufijo {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  .precio-ideal {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    text-align: center;
+    margin: 0 0 1.5rem;
+  }
+
+  .precio-ideal strong {
+    color: var(--color-text);
+  }
+
+  .precio-filas {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin: 0;
+    padding: 1.25rem 0 0;
+    border-top: 1px solid var(--color-border);
+    flex: 1;
+  }
+
+  .precio-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .precio-fila-label {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+
+  .precio-fila-valor {
+    color: var(--color-text);
+    font-weight: 600;
+    text-align: right;
+  }
+
+  .precios-footnote {
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    max-width: 640px;
+    margin: 2.5rem auto 0;
+  }
+
   /* Proceso */
   .proceso-section {
     background-color: var(--color-surface);
@@ -320,6 +550,18 @@ const herramientasLoop = [...herramientas, ...herramientas];
   .proceso-step {
     flex: 1;
     text-align: center;
+    background-color: var(--color-surface);
+    border: 1px solid rgba(78, 74, 87, 0.08);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem;
+    box-shadow: 0 8px 30px rgba(78, 74, 87, 0.08);
+    transition: box-shadow 0.3s ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .proceso-step:hover {
+      box-shadow: 0 4px 40px rgba(78, 74, 87, 0.12);
+    }
   }
 
   .proceso-number {
@@ -440,11 +682,19 @@ const herramientasLoop = [...herramientas, ...herramientas];
       flex-direction: column;
       align-items: center;
     }
+
+    .precios-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 480px) {
     .section-inner {
       padding: 3rem 1rem;
+    }
+
+    .precios-section .section-inner {
+      padding-top: 0;
     }
   }
 </style>
