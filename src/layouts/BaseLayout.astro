@@ -117,17 +117,23 @@ const altUrl = site && altPath !== undefined ? new URL(`${base}${altPath}`, site
   }
 
   /* Scroll zoom: same reveal machinery, used on individual cards for a
-     more noticeable scale change instead of the section level slide. */
+     more noticeable scale change instead of the section level slide.
+     The transition list here is the one that actually wins the cascade
+     on every card (same specificity as the card's own class, declared
+     later), so it carries box-shadow/background-color/border-color too,
+     not just opacity and transform, otherwise those card level hover
+     and scroll focus changes would jump instead of ease. */
   html.js .reveal-card {
     opacity: 0;
     transform: scale(0.92);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out,
+      box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
     will-change: opacity, transform;
   }
 
   html.js .reveal-card.is-visible {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(calc(1 + (0.04 * var(--focus, 0))));
     will-change: auto;
   }
 
