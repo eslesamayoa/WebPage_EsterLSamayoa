@@ -8,7 +8,7 @@ interface Props {
 
 const { lang = 'es', altHref = '' } = Astro.props;
 const base = import.meta.env.BASE_URL;
-const homeHref = lang === 'es' ? base : `${base}en/`;
+const homeHref = lang === 'es' ? `${base}es/` : base;
 
 const copy = {
   es: {
@@ -21,8 +21,8 @@ const copy = {
     contacto: 'Contacto',
     servicesHref: `${base}servicios`,
     aboutHref: `${base}sobre-mi`,
-    faqHref: `${base}#faq`,
-    contactHref: `${base}#contacto`,
+    faqHref: `${base}es/#faq`,
+    contactHref: `${base}es/#contacto`,
   },
   en: {
     ariaNav: 'Main navigation',
@@ -34,8 +34,8 @@ const copy = {
     contacto: 'Contact',
     servicesHref: `${base}en/services`,
     aboutHref: `${base}en/about`,
-    faqHref: `${base}en/#faq`,
-    contactHref: `${base}en/#contact`,
+    faqHref: `${base}#faq`,
+    contactHref: `${base}#contact`,
   },
 };
 
